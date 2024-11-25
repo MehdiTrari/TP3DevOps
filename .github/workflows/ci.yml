@@ -9,41 +9,45 @@ on:
 
 jobs:
   ci:
-    name: CI Checks
     runs-on: ubuntu-latest
 
     steps:
-      # Étape 1 : Vérifier le code source
-      - name: Checkout Code
+      # Vérifier le code source
+      - name: Checkout code
         uses: actions/checkout@v3
 
-      # Étape 2 : Configurer Node.js
-      - name: Setup Node.js
+      # Configurer Node.js
+      - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 20
-          cache: "npm"
+          node-version: '20'
 
-      # Étape 3 : Installer les dépendances
+      # Installer les dépendances du projet
       - name: Install dependencies
         run: npm install
 
-      # Étape 4 : Vérifier le linter
-      - name: Run Linter
-        run: npm run lint
+      # Vérifier le formatage
+      - name: Check code format
+        run: npm run format:check
 
-      # Étape 5 : Exécuter les tests
-      - name: Run Tests
+      # Lancer les tests
+      - name: Run tests
         run: npm test
 
-      # Étape 6 : Construire le projet
-      - name: Build Project
-        run: npm run build
+      # Vérifier le linter
+      - name: Run linter
+        run: npm run lint
 
-      # Étape 7 : Construire la documentation
-      - name: Build Documentation
+      # Installer MkDocs
+      - name: Install MkDocs
+        run: |
+          python3 -m pip install --upgrade pip
+          pip install mkdocs
+
+      # Build la documentation
+      - name: Build documentation
         run: mkdocs build
 
-      # Étape 8 : Vérifier le formatage
-      - name: Check Code Formatting
-        run: npm run format:check
+      # Construire le projet
+      - name: Build project
+        run: npm run build
