@@ -11,7 +11,12 @@ describe("PokemonService", () => {
     mockPokeApiClient = {
       getPokemonList: async () => [
         { id: 1, name: "Bulbasaur", sprite: "bulbasaur.png", types: ["Grass"] },
-        { id: 2, name: "Charmander", sprite: "charmander.png", types: ["Fire"] },
+        {
+          id: 2,
+          name: "Charmander",
+          sprite: "charmander.png",
+          types: ["Fire"],
+        },
       ],
     };
     pokemonService = new PokemonService(mockPokeApiClient);
