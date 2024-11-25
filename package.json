@@ -11,7 +11,7 @@
     "typecheck": "tsc",
     "format:write": "prettier --write app",
     "format:check": "prettier --check app",
-    "test": "vitest"
+    "test": "vitest run"
   },
   "dependencies": {
     "@remix-run/node": "^2.15.0",
@@ -23,6 +23,7 @@
   },
   "devDependencies": {
     "@remix-run/dev": "^2.15.0",
+    "@types/jest": "^29.5.14",
     "@types/react": "^18.2.20",
     "@types/react-dom": "^18.2.7",
     "@typescript-eslint/eslint-plugin": "^6.7.4",

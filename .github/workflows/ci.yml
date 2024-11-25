@@ -1,0 +1,49 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+  pull_request:
+
+jobs:
+  ci:
+    name: CI Checks
+    runs-on: ubuntu-latest
+
+    steps:
+      # Étape 1 : Vérifier le code source
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      # Étape 2 : Configurer Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+          cache: "npm"
+
+      # Étape 3 : Installer les dépendances
+      - name: Install dependencies
+        run: npm install
+
+      # Étape 4 : Vérifier le linter
+      - name: Run Linter
+        run: npm run lint
+
+      # Étape 5 : Exécuter les tests
+      - name: Run Tests
+        run: npm test
+
+      # Étape 6 : Construire le projet
+      - name: Build Project
+        run: npm run build
+
+      # Étape 7 : Construire la documentation
+      - name: Build Documentation
+        run: mkdocs build
+
+      # Étape 8 : Vérifier le formatage
+      - name: Check Code Formatting
+        run: npm run format:check
